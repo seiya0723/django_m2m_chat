@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>チャット</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <script src="{% static 'bbs/js/script.js' %}"></script>
+
+</head>
+<body>
+
+    <h1 class="bg-primary text-white">チャットページ</h1>
+
+    <div class="row mx-0">
+        {# この部分はタブシステムでも良いが、メッセージが増えていくとレンダリングに時間がかかるのでは？ #}
+        {# ボタンクリックでAjax発動、メッセージを表示させる方式に仕立てた。#}
+
+        <div class="col-4">
+            {% for chat_group in chat_groups %}
+            <label style="width:100%;padding:2rem 0.5rem; border:solid 1px black; cursor:pointer;">
+                <div>
+                {% for member in chat_group.member.all %}
+                <span>{{ member.last_name }}{{ member.first_name }}</span> 
+                {% endfor %}
+                </div>
+
+                <button class="chat_area_button" style="display:none;" value="{% url 'bbs:chat_message' chat_group.id %}"></button>
+            </label>
+            {% endfor %}
+        </div>
+        <div id="chat_area" class="col-8">
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
+

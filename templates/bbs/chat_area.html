@@ -1,0 +1,15 @@
+{% for chat in chat_group.chats %}
+<div class="border">
+    <div>{{ chat.user.last_name }}{{ chat.user.first_name }}</div>
+    <div>{{ chat.dt }}</div>
+    <div>{{ chat.message }}</div>
+</div>
+{% endfor %}
+
+<form id="form_area" action="{% url 'bbs:chat_message' chat_group.id %}" method="POST">
+    {% csrf_token %}
+    <textarea class="form-control" name="message"></textarea>
+    <input id="message_submit" type="button" value="送信">
+</form>
+
+
